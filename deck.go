@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Create new type 'deck'
 
@@ -30,3 +32,18 @@ func (dk deck) print() {
 func deal(dk deck, handSize int) (deck, deck) {
 	return dk[:handSize], dk[handSize:]
 }
+
+// Take a deck and return a string
+func (dk deck) toString() string {
+	str := ""
+	for _, card := range dk {
+		str = str + card + ","
+	}
+	return str
+}
+
+//Alternative
+//func (dk deck) toString() string {
+//	return strings.Join([]string(d), ",")
+//}
+
