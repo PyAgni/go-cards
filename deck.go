@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 )
 
 // Create new type 'deck'
@@ -47,3 +48,9 @@ func (dk deck) toString() string {
 //	return strings.Join([]string(d), ",")
 //}
 
+//Saves a deck to file.txt
+//Note that string has to be changed to byte for writing to file
+//0666 -> Anyone can read or write
+func (dk deck) saveToFile(filename string) error {
+	return ioutil.WriteFile(filename, []byte(dk.toString()), 0666)
+}
