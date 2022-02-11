@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"strings"
 )
 
 // Create new type 'deck'
@@ -53,4 +55,19 @@ func (dk deck) toString() string {
 //0666 -> Anyone can read or write
 func (dk deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(dk.toString()), 0666)
+}
+
+func getDeckFromFile(filename string) deck {
+	deck_byte_slice, err := ioutil.ReadFile(filename)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
+
+	deck_string := string(deck_byte_slice)
+	deck_string_slice := strings.Split(deck_string, ",")
+	deck := deck(deck_string_slice)
+
+	return deck
 }
